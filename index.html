@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Password Cracker v2.0 | 10M Passwords</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a2e">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔓 Ultimate Password Cracker v2.0</h1>
+            <p>10 Million Passwords | Web Workers | Real-time Stats</p>
+        </header>
 
+        <div class="upload-section">
+            <div class="file-upload">
+                <input type="file" id="wordlist" accept=".csv,.txt" class="file-input">
+                <label for="wordlist" class="file-label">
+                    📁 اختر قائمة كلمات المرور (10M CSV)
+                </label>
+                <div id="file-info" class="file-info"></div>
+            </div>
+        </div>
+
+        <div class="config-section">
+            <div class="config-grid">
+                <div class="config-item">
+                    <label>🎯 Target IP/Host</label>
+                    <input type="text" id="target" placeholder="192.168.1.100" value="192.168.1.100">
+                </div>
+                <div class="config-item">
+                    <label>👤 Username</label>
+                    <input type="text" id="username" placeholder="Administrator" value="Administrator">
+                </div>
+                <div class="config-item">
+                    <label>⚙️ Workers</label>
+                    <select id="workers">
+                        <option value="8">8 Workers</option>
+                        <option value="16" selected>16 Workers</option>
+                        <option value="32">32 Workers</option>
+                        <option value="64">64 Workers</option>
+                        <option value="128">128 Workers</option>
+                    </select>
+                </div>
+                <div class="config-item">
+                    <label>⏱️ Delay (ms)</label>
+                    <input type="number" id="delay" value="25" min="10" max="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Passwords Loaded</span>
+                    <span id="total-pwds" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Speed</span>
+                    <span id="speed" class="stat-value">0 H/s</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Attempts</span>
+                    <span id="attempts" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Status</span>
+                    <span id="status" class="stat-value">جاهز</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <button id="start-btn" class="btn-primary">🚀 ابدأ الاختراق</button>
+            <button id="stop-btn" class="btn-secondary" disabled>⏹️ إيقاف</button>
+            <button id="export-btn" class="btn-secondary" disabled>💾 تصدير النتائج</button>
+        </div>
+
+        <div class="results-section">
+            <h3>✅ النتائج المكتشفة</h3>
+            <div id="results-list"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
