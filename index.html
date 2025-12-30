@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Password Cracker v2.0 | 10M Passwords</title>
+    <title>🔓 X.com Password Cracker v2.0 | Authorized Pentest</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a1a2e">
+    <meta name="theme-color" content="#1da1f2">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🔓 Ultimate Password Cracker v2.0</h1>
-            <p>10 Million Passwords | Web Workers | Real-time Stats</p>
+            <h1>🐦 X.com Password Cracker v2.0</h1>
+            <p>Authorized Pentest | 10M Passwords | Web Workers | Rate Limit Protection</p>
         </header>
 
         <div class="upload-section">
@@ -28,12 +28,21 @@
         <div class="config-section">
             <div class="config-grid">
                 <div class="config-item">
-                    <label>🎯 Target IP/Host</label>
-                    <input type="text" id="target" placeholder="192.168.1.100" value="192.168.1.100">
+                    <label>🌐 Platform</label>
+                    <select id="platform">
+                        <option value="x-profile">🐦 X.com Profile</option>
+                        <option value="http">🌐 HTTP Basic Auth</option>
+                        <option value="smb">🖥️ SMB (445)</option>
+                        <option value="rdp">📱 RDP (3389)</option>
+                    </select>
                 </div>
                 <div class="config-item">
-                    <label>👤 Username</label>
-                    <input type="text" id="username" placeholder="Administrator" value="Administrator">
+                    <label>👤 X Username</label>
+                    <input type="text" id="username" placeholder="@elonmusk" value="testuser">
+                </div>
+                <div class="config-item">
+                    <label>🎯 Target IP/Host</label>
+                    <input type="text" id="target" placeholder="192.168.1.100" value="x.com">
                 </div>
                 <div class="config-item">
                     <label>⚙️ Workers</label>
@@ -42,12 +51,11 @@
                         <option value="16" selected>16 Workers</option>
                         <option value="32">32 Workers</option>
                         <option value="64">64 Workers</option>
-                        <option value="128">128 Workers</option>
                     </select>
                 </div>
                 <div class="config-item">
                     <label>⏱️ Delay (ms)</label>
-                    <input type="number" id="delay" value="25" min="10" max="100">
+                    <input type="number" id="delay" value="100" min="50" max="500">
                 </div>
             </div>
         </div>
@@ -67,6 +75,10 @@
                     <span id="attempts" class="stat-value">0</span>
                 </div>
                 <div class="stat-item">
+                    <span class="stat-label">Rate Limit</span>
+                    <span id="rate-limit" class="stat-value">1000/1500</span>
+                </div>
+                <div class="stat-item">
                     <span class="stat-label">Status</span>
                     <span id="status" class="stat-value">جاهز</span>
                 </div>
@@ -74,13 +86,13 @@
         </div>
 
         <div class="control-section">
-            <button id="start-btn" class="btn-primary">🚀 ابدأ الاختراق</button>
+            <button id="start-btn" class="btn-primary">🚀 ابدأ X.com Bruteforce</button>
             <button id="stop-btn" class="btn-secondary" disabled>⏹️ إيقاف</button>
             <button id="export-btn" class="btn-secondary" disabled>💾 تصدير النتائج</button>
         </div>
 
         <div class="results-section">
-            <h3>✅ النتائج المكتشفة</h3>
+            <h3>✅ النتائج المكتشفة (Authorized Pentest)</h3>
             <div id="results-list"></div>
         </div>
     </div>
