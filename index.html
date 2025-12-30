@@ -3,98 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔓 X.com Password Cracker v2.0 | Authorized Pentest</title>
+    <title>🔓 Real Pentest Cracker v2.0 | Backend Proxy</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1da1f2">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🐦 X.com Password Cracker v2.0</h1>
-            <p>Authorized Pentest | 10M Passwords | Web Workers | Rate Limit Protection</p>
+            <h1>🔥 Real Pentest Cracker v2.0</h1>
+            <p>Backend Proxy | SMB/HTTP/RDP | 2M+ H/s | بإذن رسمي</p>
         </header>
 
+        <!-- File Upload -->
         <div class="upload-section">
-            <div class="file-upload">
-                <input type="file" id="wordlist" accept=".csv,.txt" class="file-input">
-                <label for="wordlist" class="file-label">
-                    📁 اختر قائمة كلمات المرور (10M CSV)
-                </label>
-                <div id="file-info" class="file-info"></div>
-            </div>
+            <input type="file" id="wordlist" accept=".csv,.txt">
+            <div id="file-info"></div>
         </div>
 
+        <!-- Config -->
         <div class="config-section">
             <div class="config-grid">
                 <div class="config-item">
-                    <label>🌐 Platform</label>
-                    <select id="platform">
-                        <option value="x-profile">🐦 X.com Profile</option>
-                        <option value="http">🌐 HTTP Basic Auth</option>
-                        <option value="smb">🖥️ SMB (445)</option>
-                        <option value="rdp">📱 RDP (3389)</option>
+                    <label>🎯 Target</label>
+                    <input type="text" id="target" placeholder="192.168.1.100" value="192.168.1.100">
+                </div>
+                <div class="config-item">
+                    <label>👤 Username</label>
+                    <input type="text" id="username" value="Administrator">
+                </div>
+                <div class="config-item">
+                    <label>⚙️ Protocol</label>
+                    <select id="protocol">
+                        <option value="http">HTTP Basic Auth</option>
+                        <option value="smb">SMB (445)</option>
+                        <option value="rdp">RDP (3389)</option>
+                        <option value="ssh">SSH (22)</option>
                     </select>
                 </div>
                 <div class="config-item">
-                    <label>👤 X Username</label>
-                    <input type="text" id="username" placeholder="@elonmusk" value="testuser">
-                </div>
-                <div class="config-item">
-                    <label>🎯 Target IP/Host</label>
-                    <input type="text" id="target" placeholder="192.168.1.100" value="x.com">
-                </div>
-                <div class="config-item">
-                    <label>⚙️ Workers</label>
+                    <label>🔧 Workers</label>
                     <select id="workers">
-                        <option value="8">8 Workers</option>
-                        <option value="16" selected>16 Workers</option>
-                        <option value="32">32 Workers</option>
                         <option value="64">64 Workers</option>
+                        <option value="128">128 Workers</option>
                     </select>
                 </div>
-                <div class="config-item">
-                    <label>⏱️ Delay (ms)</label>
-                    <input type="number" id="delay" value="100" min="50" max="500">
-                </div>
             </div>
         </div>
 
-        <div class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-label">Passwords Loaded</span>
-                    <span id="total-pwds" class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Speed</span>
-                    <span id="speed" class="stat-value">0 H/s</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Attempts</span>
-                    <span id="attempts" class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Rate Limit</span>
-                    <span id="rate-limit" class="stat-value">1000/1500</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Status</span>
-                    <span id="status" class="stat-value">جاهز</span>
-                </div>
-            </div>
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-item"><span>Passwords</span><span id="total">0</span></div>
+            <div class="stat-item"><span>Speed</span><span id="speed">0 H/s</span></div>
+            <div class="stat-item"><span>Attempts</span><span id="attempts">0</span></div>
+            <div class="stat-item"><span>Success</span><span id="success">0</span></div>
         </div>
 
-        <div class="control-section">
-            <button id="start-btn" class="btn-primary">🚀 ابدأ X.com Bruteforce</button>
-            <button id="stop-btn" class="btn-secondary" disabled>⏹️ إيقاف</button>
-            <button id="export-btn" class="btn-secondary" disabled>💾 تصدير النتائج</button>
+        <!-- Controls -->
+        <div class="controls">
+            <button id="start">🚀 START REAL ATTACK</button>
+            <button id="stop" disabled>⏹️ STOP</button>
         </div>
 
-        <div class="results-section">
-            <h3>✅ النتائج المكتشفة (Authorized Pentest)</h3>
-            <div id="results-list"></div>
-        </div>
+        <!-- Results -->
+        <div id="results"></div>
     </div>
 
     <script src="app.js"></script>
