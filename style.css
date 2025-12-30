@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+    background: linear-gradient(135deg, #1da1f2 0%, #14171a 50%, #000000 100%);
     color: #ffffff;
     min-height: 100vh;
     direction: rtl;
@@ -25,7 +25,7 @@ header {
 
 header h1 {
     font-size: 2.5rem;
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    background: linear-gradient(45deg, #1da1f2, #ffad1f, #f91880);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 10px;
@@ -33,48 +33,35 @@ header h1 {
 
 header p {
     font-size: 1.2rem;
-    opacity: 0.8;
+    opacity: 0.9;
+    color: #1da1f2;
 }
 
-.file-upload {
-    position: relative;
+.file-upload, .config-grid, .stats-grid {
     margin-bottom: 30px;
-}
-
-.file-input {
-    display: none;
 }
 
 .file-label {
     display: block;
     padding: 20px;
-    border: 3px dashed #4ecdc4;
+    border: 3px dashed #1da1f2;
     border-radius: 15px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: rgba(78, 205, 196, 0.1);
+    background: rgba(29, 161, 242, 0.1);
 }
 
 .file-label:hover {
-    border-color: #ff6b6b;
-    background: rgba(255, 107, 107, 0.1);
+    border-color: #f91880;
+    background: rgba(249, 24, 128, 0.1);
     transform: scale(1.02);
-}
-
-.file-info {
-    margin-top: 10px;
-    padding: 10px;
-    background: rgba(0, 255, 0, 0.1);
-    border-radius: 8px;
-    font-weight: bold;
 }
 
 .config-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    margin-bottom: 30px;
 }
 
 .config-item {
@@ -82,14 +69,14 @@ header p {
     padding: 20px;
     border-radius: 12px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(29, 161, 242, 0.3);
 }
 
 .config-item label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #4ecdc4;
+    color: #1da1f2;
 }
 
 .config-item input, .config-item select {
@@ -102,36 +89,24 @@ header p {
     font-size: 16px;
 }
 
-.config-item input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
-    margin-bottom: 30px;
 }
 
 .stat-item {
-    background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(255, 107, 107, 0.2));
+    background: linear-gradient(135deg, rgba(29, 161, 242, 0.2), rgba(249, 24, 128, 0.2));
     padding: 20px;
     border-radius: 12px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.stat-label {
-    display: block;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 5px;
-}
-
 .stat-value {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
-    color: #4ecdc4;
+    color: #1da1f2;
 }
 
 .control-section {
@@ -142,93 +117,64 @@ header p {
     flex-wrap: wrap;
 }
 
-.btn-primary, .btn-secondary {
-    padding: 15px 30px;
+.btn-primary {
+    padding: 15px 40px;
     border: none;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 180px;
-}
-
-.btn-primary {
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    background: linear-gradient(45deg, #1da1f2, #f91880);
     color: white;
+    transition: all 0.3s ease;
+    min-width: 220px;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 15px 30px rgba(29, 161, 242, 0.4);
 }
 
 .btn-secondary {
+    padding: 15px 30px;
     background: rgba(255, 255, 255, 0.1);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-secondary:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.btn-secondary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
 .results-section {
     background: rgba(0, 255, 0, 0.05);
-    border: 1px solid rgba(0, 255, 0, 0.2);
+    border: 1px solid rgba(0, 255, 0, 0.3);
     border-radius: 12px;
     padding: 20px;
 }
 
-.results-section h3 {
-    margin-bottom: 15px;
-    color: #4ecdc4;
-}
-
-#results-list {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
 .result-item {
     background: rgba(0, 255, 0, 0.2);
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border-right: 4px solid #00ff00;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border-right: 5px solid #00ff88;
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
 .stat-value.active {
-    animation: pulse 1s infinite;
+    animation: pulse 1.5s infinite;
 }
 
 @media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-    
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    .control-section {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .btn-primary, .btn-secondary {
-        width: 100%;
-        max-width: 300px;
+    .config-grid, .stats-grid {
+        grid-template-columns: 1fr;
     }
 }
